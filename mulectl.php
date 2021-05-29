@@ -4,22 +4,15 @@
     </head>
     <body>
     <!-- ---------------------------------------------------------------------- -->
-<textarea rows="25" cols="80">
-<?php
-
-var_dump($_SERVER);
-
+<?php 
+/* Add redirection so we can get stderr. */
+$handle = popen('/bin/ps --no-headers -f -C amuled 2>&1', 'r');
+#echo "'$handle'; " . gettype($handle) . "\n";
+$read = fread($handle, 2096);
+# echo $read;
+pclose($handle);
 ?>
-</textarea>
-
-<br />
-
-<?php
-
-var_dump($_REQUEST);
-
-?>
-
+	<textarea rows="10" cols="120"><?=$read?></textarea>
     <!-- ---------------------------------------------------------------------- -->
     </body>
 </html>
